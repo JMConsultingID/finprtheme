@@ -66,7 +66,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 		<div class="d-flex justify-content-between mt-4">
 			<button type="button" class="btn btn-secondary prev-step" data-prev="2">Back</button>
-			<button type="submit" class="btn btn-success">Place Order</button>
 		</div>
 	</div>
 
