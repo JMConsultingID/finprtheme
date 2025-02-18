@@ -38,10 +38,12 @@ class Finprtheme_Checkout {
 
     private function includes() {
         require_once FIN_THEME_DIR . 'inc/public/class-single-product-checkout.php';
+        require_once FIN_THEME_DIR . 'inc/public/class-checkout-additional-fee-platform.php';
     }
 
     private function init() {
         new FinPr_Single_Product_Checkout();
+        new FinPr_Additional_Platform_Fee_Checkout();
     }
 
     public function fin_remove_order_review_from_checkout() {
@@ -55,7 +57,8 @@ class Finprtheme_Checkout {
         wp_enqueue_style('fin-theme-style', get_stylesheet_directory_uri() . '/style.css', [], FIN_THEME_VERSION);
         wp_enqueue_style('fin-theme-custom-style', get_stylesheet_directory_uri() . '/assets/css/finprtheme.css', [], FIN_THEME_VERSION);
         wp_enqueue_script('fin-bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js', ['jquery'], '5.3.0-alpha3', true);
-        wp_enqueue_script('fin-theme-custom-script', get_stylesheet_directory_uri() . '/assets/js/finprtheme.js', [], FIN_THEME_VERSION, true);    
+        wp_enqueue_script('fin-script', get_stylesheet_directory_uri() . '/assets/js/finprtheme.js', [], FIN_THEME_VERSION, true);  
+        wp_enqueue_script('fin-platform-script', get_stylesheet_directory_uri() . '/assets/js/finprtheme_platform.js', [], FIN_THEME_VERSION, true);
     }    
 
 }
