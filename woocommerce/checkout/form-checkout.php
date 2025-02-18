@@ -24,16 +24,16 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 	<!-- Multi-Step Navigation -->
 	<ul class="nav nav-pills nav-justified checkout-steps">
-		<li class="nav-item">
-			<a class="nav-link active" data-step="1" href="#">1. Select Account</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link disabled" data-step="2" href="#">2. Billing Details</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link disabled" data-step="3" href="#">3. Make Payment</a>
-		</li>
-	</ul>
+        <li class="nav-item">
+            <a class="nav-link active" data-step="1" href="#">1. Select Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-step="2" href="#">2. Billing Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-step="3" href="#">3. Make Payment</a>
+        </li>
+    </ul>
 
 	<!-- Step 1: Account Selection -->
 	<div class="checkout-step-content step-1 active">
