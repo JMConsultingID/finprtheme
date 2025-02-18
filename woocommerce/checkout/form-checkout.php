@@ -39,6 +39,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	<div class="checkout-step-content step-1 active">
 		<?php do_action('woocommerce_checkout_before_customer_details'); ?>  
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
+		<?php do_action('woocommerce_checkout_order_review'); ?>
 
 		<div class="text-center mt-4">
 			<button type="button" class="btn btn-primary next-step" data-next="2">Next</button>
