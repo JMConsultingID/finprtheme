@@ -1,0 +1,29 @@
+.checkout-steps {
+    margin-bottom: 20px;
+}
+
+.checkout-steps .nav-link {
+    background-color: #f8f9fa;
+    color: #333;
+    border-radius: 50px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.checkout-steps .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.checkout-step-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    margin-top: 20px;
+}
+
+.checkout-step-content.active {
+    display: block;
+}
