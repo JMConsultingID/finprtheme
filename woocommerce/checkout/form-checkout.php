@@ -1,110 +1,77 @@
 <?php
 /**
- * Checkout Form
+ * Checkout Form - Multi-Step with Bootstrap
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-checkout.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woo.com/document/template-structure/
  * @package WooCommerce\Templates
  * @version 9.4.0
  */
 
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-do_action('woocommerce_before_checkout_form', $checkout);
+do_action( 'woocommerce_before_checkout_form', $checkout );
 
 // If checkout registration is disabled and not logged in, the user cannot checkout.
-if (!$checkout->is_registration_enabled() && $checkout->is_registration_required() && !is_user_logged_in()) {
-    echo esc_html(apply_filters('woocommerce_checkout_must_be_logged_in_message', __('You must be logged in to checkout.', 'woocommerce')));
-    return;
+if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() ) {
+	echo esc_html( apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) );
+	return;
 }
+
 ?>
 
-<div id="yourpropfirm-multi-step-checkout">
-    <!-- Step Navigation -->
-    <ul class="checkout-steps">
-        <li class="step active" data-step="1">1. Select Account</li>
-        <li class="step" data-step="2">2. Billing Details</li>
-        <li class="step" data-step="3">3. Make Payment</li>
-    </ul>
+<form name="checkout" method="post" class="checkout woocommerce-checkout hello-theme-checkout container" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
-    <form name="checkout" method="post" class="checkout woocommerce-checkout hello-theme-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-        <?php if ($checkout->get_checkout_fields()) : ?>
-            
-            <!-- Step 1: Account Selection -->
-            <div class="checkout-step-content active" data-step="1">
-                <h3>Select Account</h3>
-                <?php do_action('yourpropfirm_checkout_variant_selector'); ?>
-                <?php do_action('woocommerce_checkout_before_customer_details'); ?>                
-                <button type="button" class="next-step" data-next="2">Next</button>
-            </div>
-            
-            <!-- Step 2: Billing Details -->
-            <div class="checkout-step-content" data-step="2">
-                <h3>Billing Details</h3>
-                <div id="customer_details">
-                    <div class="container">
-                        <?php do_action('woocommerce_checkout_billing'); ?>
-                    </div>
-                </div>
-                <button type="button" class="prev-step" data-prev="1">Back</button>
-                <button type="button" class="next-step" data-next="3">Next</button>
-            </div>
-            
-            <!-- Step 3: Payment -->
-            <div class="checkout-step-content" data-step="3">
-                <h3>Choose Payment Method</h3>
-                <?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
-                <div id="order_review" class="woocommerce-checkout-review-order">
-                    <?php do_action('woocommerce_checkout_order_review'); ?>
-                </div>
-                <?php do_action('woocommerce_checkout_payment'); ?>
-                <button type="button" class="prev-step" data-prev="2">Back</button>
-                <button type="submit" class="place-order">Place Order</button>
-            </div>
-            
-        <?php endif; ?>
-    </form>
-</div>
+	<!-- Multi-Step Navigation -->
+	<ul class="nav nav-pills nav-justified checkout-steps">
+		<li class="nav-item">
+			<a class="nav-link active" data-step="1" href="#">1. Select Account</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-step="2" href="#">2. Billing Details</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-step="3" href="#">3. Make Payment</a>
+		</li>
+	</ul>
 
-<script>
-(function($) {
-    'use strict';
-    
-    $(document).ready(function() {
-        function updateStep(step) {
-            $('.checkout-step-content').removeClass('active');
-            $('.checkout-step-content[data-step="' + step + '"]').addClass('active');
-            
-            $('.checkout-steps .step').removeClass('active');
-            $('.checkout-steps .step[data-step="' + step + '"]').addClass('active');
-        }
+	<!-- Step 1: Account Selection -->
+	<div class="checkout-step-content step-1 active">
+		<h3>Select Account</h3>
+		<?php do_action('woocommerce_checkout_before_customer_details'); ?>  
+		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
-        $('.checkout-steps .step').on('click', function() {
-            var step = $(this).data('step');
-            updateStep(step);
-        });
+		<div class="text-center mt-4">
+			<button type="button" class="btn btn-primary next-step" data-next="2">Next</button>
+		</div>
+	</div>
 
-        $('.next-step').on('click', function() {
-            var nextStep = $(this).data('next');
-            updateStep(nextStep);
-        });
+	<!-- Step 2: Billing Details -->
+	<div class="checkout-step-content step-2">
+		<h3>Billing Details</h3>
+		<div id="customer_details">
+			<div class="container">
+				<?php do_action( 'woocommerce_checkout_billing' ); ?>
+			</div>
 
-        $('.prev-step').on('click', function() {
-            var prevStep = $(this).data('prev');
-            updateStep(prevStep);
-        });
-    });
+			<div class="d-flex justify-content-between mt-4">
+				<button type="button" class="btn btn-secondary prev-step" data-prev="1">Back</button>
+				<button type="button" class="btn btn-primary next-step" data-next="3">Next</button>
+			</div>
+		</div>
+	</div>
 
-})(jQuery);
-</script>
+	<!-- Step 3: Payment -->
+	<div class="checkout-step-content step-3">
+		<h3>Choose Payment Method</h3>
+		<?php do_action('woocommerce_checkout_payment'); ?>
 
-<?php do_action('woocommerce_after_checkout_form', $checkout); ?>
+		<div class="d-flex justify-content-between mt-4">
+			<button type="button" class="btn btn-secondary prev-step" data-prev="2">Back</button>
+			<button type="submit" class="btn btn-success">Place Order</button>
+		</div>
+	</div>
+
+</form>
+
+<?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
