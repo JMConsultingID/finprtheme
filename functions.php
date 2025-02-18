@@ -45,6 +45,7 @@ class Finprtheme_Checkout {
     }
 
     public function fin_remove_order_review_from_checkout() {
+        remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
         remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
     }
 
