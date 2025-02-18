@@ -43,10 +43,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
             <div class="checkout-step-content active" data-step="1">
                 <h3>Select Account</h3>
                 <?php do_action('yourpropfirm_checkout_variant_selector'); ?>
-                <?php do_action('woocommerce_checkout_before_customer_details'); ?>
-                <div id="order_review" class="woocommerce-checkout-review-order">
-                    <?php do_action('woocommerce_checkout_order_review'); ?>
-                </div>
+                <?php do_action('woocommerce_checkout_before_customer_details'); ?>                
                 <button type="button" class="next-step" data-next="2">Next</button>
             </div>
             
@@ -66,6 +63,9 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
             <div class="checkout-step-content" data-step="3">
                 <h3>Choose Payment Method</h3>
                 <?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
+                <div id="order_review" class="woocommerce-checkout-review-order">
+                    <?php do_action('woocommerce_checkout_order_review'); ?>
+                </div>
                 <?php do_action('woocommerce_checkout_payment'); ?>
                 <button type="button" class="prev-step" data-prev="2">Back</button>
                 <button type="submit" class="place-order">Place Order</button>
