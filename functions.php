@@ -31,3 +31,13 @@ function fin_theme_scripts_styles()
     wp_enqueue_script('fin-theme-custom-script', get_stylesheet_directory_uri() . '/assets/js/finprtheme.js', [], FIN_THEME_VERSION, true);    
 }
 add_action('wp_enqueue_scripts', 'fin_theme_scripts_styles', 20);
+
+// Remove default order review and payment sections
+add_action('wp', 'fin_checkout_order_review');
+function fin_checkout_order_review() {
+    if (is_checkout()) {
+        // Remove the default order review and payment sections
+        remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
+        remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+    }
+}
