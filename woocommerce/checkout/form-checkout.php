@@ -28,10 +28,10 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 			<a class="nav-link active" data-step="1" href="#">1. Select Account</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" data-step="2" href="#">2. Billing Details</a>
+			<a class="nav-link disabled" data-step="2" href="#">2. Billing Details</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" data-step="3" href="#">3. Make Payment</a>
+			<a class="nav-link disabled" data-step="3" href="#">3. Make Payment</a>
 		</li>
 	</ul>
 
@@ -62,6 +62,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	<!-- Step 3: Payment -->
 	<div class="checkout-step-content step-3">
 		<?php do_action('woocommerce_checkout_payment'); ?>
+		<?php do_action('woocommerce_checkout_order_review'); ?>
 
 		<div class="d-flex justify-content-between mt-4">
 			<button type="button" class="btn btn-secondary prev-step" data-prev="2">Back</button>
