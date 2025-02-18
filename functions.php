@@ -33,8 +33,8 @@ function fin_theme_scripts_styles()
 add_action('wp_enqueue_scripts', 'fin_theme_scripts_styles', 20);
 
 // Remove order review from the checkout page
-add_action('wp', 'remove_order_review_from_checkout');
-function remove_order_review_from_checkout() {
+add_action('wp', 'fin_remove_order_review_from_checkout');
+function fin_remove_order_review_from_checkout() {
     remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
 }
 
