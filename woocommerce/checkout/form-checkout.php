@@ -1,16 +1,7 @@
 <?php
 /**
- * Checkout Form
+ * Checkout Form - Multi-Step with Bootstrap
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-checkout.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
  * @version 9.4.0
  */
@@ -29,37 +20,57 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 ?>
 
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data" aria-label="<?php echo esc_attr__( 'Checkout', 'woocommerce' ); ?>">
+<form name="checkout" method="post" class="checkout woocommerce-checkout hello-theme-checkout container" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
-	<?php if ( $checkout->get_checkout_fields() ) : ?>
+	<!-- Multi-Step Navigation -->
+	<ul class="nav nav-pills nav-justified checkout-steps">
+		<li class="nav-item">
+			<a class="nav-link active" data-step="1" href="#">1. Select Account</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link disabled" data-step="2" href="#">2. Billing Details</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link disabled" data-step="3" href="#">3. Make Payment</a>
+		</li>
+	</ul>
 
-		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+	<!-- Step 1: Account Selection -->
+	<div class="checkout-step-content step-1 active">
+		<h3>Select Account</h3>
+		<?php do_action('yourpropfirm_checkout_variant_selector'); ?>
+		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
-		<div class="col2-set" id="customer_details">
-			<div class="col-1">
+		<div class="text-center mt-4">
+			<button type="button" class="btn btn-primary next-step" data-next="2">Next</button>
+		</div>
+	</div>
+
+	<!-- Step 2: Billing Details -->
+	<div class="checkout-step-content step-2">
+		<h3>Billing Details</h3>
+		<div id="customer_details">
+			<div class="container">
 				<?php do_action( 'woocommerce_checkout_billing' ); ?>
 			</div>
 
-			<div class="col-2">
-				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
+			<div class="d-flex justify-content-between mt-4">
+				<button type="button" class="btn btn-secondary prev-step" data-prev="1">Back</button>
+				<button type="button" class="btn btn-primary next-step" data-next="3">Next</button>
 			</div>
 		</div>
-
-		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
-
-	<?php endif; ?>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-	
-	<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-	<div id="order_review" class="woocommerce-checkout-review-order">
-		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
 	</div>
 
-	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+	<!-- Step 3: Payment -->
+	<div class="checkout-step-content step-3">
+		<h3>Choose Payment Method</h3>
+		<?php do_action('woocommerce_checkout_payment'); ?>
+
+		<div class="d-flex justify-content-between mt-4">
+			<button type="button" class="btn btn-secondary prev-step" data-prev="2">Back</button>
+			<button type="submit" class="btn btn-success">Place Order</button>
+		</div>
+	</div>
 
 </form>
 
