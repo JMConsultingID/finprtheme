@@ -64,7 +64,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 		<?php do_action('woocommerce_checkout_payment'); ?>
 		<?php do_action('woocommerce_checkout_order_review'); ?>
 
-		<div class="d-flex justify-content-between mt-4">
+		<div class="text-center mt-4">
 			<button type="button" class="btn btn-secondary prev-step" data-prev="2">Back</button>
 		</div>
 	</div>
