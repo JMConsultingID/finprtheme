@@ -37,7 +37,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 	<!-- Step 1: Account Selection -->
 	<div class="checkout-step-content step-1 active">
-		<h3>Select Account</h3>
 		<?php do_action('woocommerce_checkout_before_customer_details'); ?>  
 		<?php do_action('woocommerce_checkout_before_order_review'); ?>
 
@@ -48,7 +47,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 	<!-- Step 2: Billing Details -->
 	<div class="checkout-step-content step-2">
-		<h3>Billing Details</h3>
 		<div id="customer_details">
 			<div class="container">
 				<?php do_action( 'woocommerce_checkout_billing' ); ?>
@@ -63,7 +61,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 	<!-- Step 3: Payment -->
 	<div class="checkout-step-content step-3">
-		<h3>Choose Payment Method</h3>
 		<?php do_action('woocommerce_checkout_payment'); ?>
 
 		<div class="d-flex justify-content-between mt-4">
