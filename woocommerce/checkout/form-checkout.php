@@ -43,6 +43,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
             <div class="checkout-step-content active" data-step="1">
                 <h3>Select Account</h3>
                 <?php do_action('yourpropfirm_checkout_variant_selector'); ?>
+                <?php do_action('woocommerce_checkout_before_customer_details'); ?>
                 <div id="order_review" class="woocommerce-checkout-review-order">
                     <?php do_action('woocommerce_checkout_order_review'); ?>
                 </div>
@@ -52,7 +53,6 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
             <!-- Step 2: Billing Details -->
             <div class="checkout-step-content" data-step="2">
                 <h3>Billing Details</h3>
-                <?php do_action('woocommerce_checkout_before_customer_details'); ?>
                 <div id="customer_details">
                     <div class="container">
                         <?php do_action('woocommerce_checkout_billing'); ?>
