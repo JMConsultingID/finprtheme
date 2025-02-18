@@ -39,5 +39,5 @@ function remove_order_review_from_checkout() {
 }
 
 // Ensure payment options are displayed
-add_action('woocommerce_checkout_before_customer_details', 'woocommerce_order_review', 10);
+add_action('woocommerce_checkout_before_order_review', 'woocommerce_order_review', 10);
 add_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
