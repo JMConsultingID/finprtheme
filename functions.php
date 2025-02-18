@@ -39,5 +39,20 @@ function fin_checkout_order_review() {
         // Remove the default order review and payment sections
         remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
         remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+
+         // Add order review to the first tab
+        add_action('woocommerce_before_checkout_form', 'fin_add_order_review_to_first_tab', 15);
+        // Add payment options to the second tab
+        add_action('woocommerce_before_checkout_form', 'fin_add_payment_options_to_second_tab', 20);
     }
+}
+
+// Add order review to the first tab
+function fin_add_order_review_to_first_tab() {
+    do_action('woocommerce_checkout_order_review');
+}
+
+// Add payment options to the second tab
+function fin_add_payment_options_to_second_tab() {
+    do_action('woocommerce_checkout_payment');
 }
